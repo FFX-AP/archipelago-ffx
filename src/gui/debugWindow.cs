@@ -1101,7 +1101,6 @@ public unsafe static class ArchipelagoGUI {
                     }
                     else {
                         foreach ((uint item_id, int amount) in other_inventory) {
-                            if (amount == 0) continue;
                             string item_name = get_other_item_name(item_id);
                             ImGui.Text($"{item_name}: {amount}");
                         }

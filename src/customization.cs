@@ -215,7 +215,8 @@ public unsafe partial class ArchipelagoFFXModule {
                 if (customizations[customization_id].item_cost != original_kaizou_costs[customization_id]) {
                     uint item_id = (uint)(0xC000 | customization_id);
                     other_inventory.TryGetValue(item_id, out int count);
-                    if (count > 0) other_inventory[item_id] = count - 1;
+                    if (--count <= 0) other_inventory.Remove(item_id);
+                    else other_inventory[item_id] = count;
                 }
             }
         }
