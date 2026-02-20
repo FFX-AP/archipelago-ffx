@@ -194,7 +194,7 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
                 (int)ArchipelagoLocationType.Capture       => capture,
                 _ => null,
             };
-            item = dict?.GetValueOrDefault(location);
+            item = dict?.GetValueOrDefault(location & 0xFF);
             return item is not null;
         }
     }
