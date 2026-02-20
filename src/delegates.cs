@@ -520,53 +520,6 @@ public static unsafe class delegates {
     public delegate void FUN_00783bb0(byte mon_id);
     public static int __addr_FUN_00783bb0 = 0x00383bb0;
 
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-    public struct MonStats {
-        [FieldOffset(0x14)] public uint   hp;
-        [FieldOffset(0x18)] public uint   mp;
-        [FieldOffset(0x1c)] public uint   overkill_threshold;
-        [FieldOffset(0x20)] public byte   strength;
-        [FieldOffset(0x21)] public byte   defense;
-        [FieldOffset(0x22)] public byte   magic;
-        [FieldOffset(0x23)] public byte   magic_defense;
-        [FieldOffset(0x24)] public byte   agility;
-        [FieldOffset(0x25)] public byte   luck;
-        [FieldOffset(0x26)] public byte   evasion;
-        [FieldOffset(0x27)] public byte   accuracy;
-        [FieldOffset(0x28)] public ushort props;
-        [FieldOffset(0x2a)] public byte   poison_dmg;
-        [FieldOffset(0x2b)] public byte   elem_absorb;
-        [FieldOffset(0x2c)] public byte   elem_immune;
-        [FieldOffset(0x2d)] public byte   elem_resist;
-        [FieldOffset(0x2e)] public byte   elem_weak;
-        [FieldOffset(0x48)] public ushort auto_status1;
-        [FieldOffset(0x4a)] public ushort auto_status2;
-        [FieldOffset(0x4c)] public ushort auto_status3;
-        [FieldOffset(0x4e)] public ushort extra_status_resist;
-
-        [FieldOffset(0x70)] public ushort forced_move;
-        [FieldOffset(0x72)] public ushort monster_idx;
-        [FieldOffset(0x74)] public ushort model_idx;
-
-        [FieldOffset(0x77)] public byte   doom_counter;
-        [FieldOffset(0x78)] public ushort monster_arena_idx;
-
-        override public string ToString() {
-            return $"hp={hp}\n" +
-                   $"mp={mp}\n" +
-                   $"strength={strength}\n" +
-                   $"defense={defense}\n" +
-                   $"magic={magic}\n" +
-                   $"magic_defense={magic_defense}\n" +
-                   $"agility={agility}\n" +
-                   $"luck={luck}\n" +
-                   $"evasion={evasion}\n" +
-                   $"accuracy={accuracy}\n" +
-                   $"monster_arena_idx={monster_arena_idx}";
-        }
-    }
-
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate Chr* MsGetMon(byte mon_idx);
     public static int __addr_MsGetMon = 0x00395ab0;
@@ -596,5 +549,95 @@ public static unsafe class delegates {
         float scale,
         float _);
     public static int __addr_TOMkpCrossExtMesFontLClutTypeRGBA = 0x501700;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void ToMakeBtlEasyFont(byte* text, float x, float y, byte alpha, float scale);
+    public static int __addr_ToMakeBtlEasyFont = 0x505AB0;
+
+    // Customization-related
+    public enum MenuListEnum : uint {
+        OVERDRIVES         = 0,
+        OVERDRIVE_MODES    = 1,
+        AEON_ABILITIES     = 3,
+        GEAR_CUSTOMIZATION = 5,
+        EQUIPMENT          = 21
+    }
+    public enum CustomizationStatusEnum : byte {
+        NONE             = 0x0,
+        AVAILABLE        = 0xb,
+        ALREADY_APPLIED  = 0xc,
+        NOT_ENOUGH_ITEMS = 0xe,
+        CONFLICTING      = 0xf, // (same group but lower level) or (same group, same level, different international bonus) or (international bonus is 0xfe AND gear has any ability with 0xff international bonus)
+        NO_SLOTS         = 0x10,
+        //NONE             = 0x11
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct CustomizationMenuList {
+        public ushort                  a_ability_id;
+        public CustomizationStatusEnum status;
+        public byte                    customization_id;
+    }
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void PrepareMenuList(MenuListEnum menu_list_id, Equipment* gear);
+    public static int __addr_PrepareMenuList = 0x004c2370;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void UpdateCustomizationMenuState(int param_1);
+    public static int __addr_UpdateCustomizationMenuState = 0x004d5800;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate CustomizationRecipe* MsGetRomKaizou(int *size);
+    public static int __addr_MsGetRomKaizou = 0x390A60;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AutoAbility* MsGetRomAbility(uint a_ability_id, int* ref_data_end);
+    public static int __addr_MsGetRomAbility = 0x3909C0;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void DrawCustomizationMenu(uint param_1);
+    public static int __addr_DrawCustomizationMenu = 0x004d5f30;
+
+    // Draw customization menu
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void FUN_008c1c70(int param_1, int param_2, uint param_3, int param_4);
+    public static int __addr_FUN_008c1c70 = 0x004c1c70;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void TODrawMenuPlateXYWHType(float x, float y, float w, float h, int type);
+    public static int __addr_TODrawMenuPlateXYWHType = 0x004f5f70;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void FUN_008f8bb0(int param_1, float param_2, float param_3, float param_4, float param_5);
+    public static int __addr_FUN_008f8bb0 = 0x004f8bb0;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void TODrawScissorXYWH(int x, int y, int w, int h);
+    public static int __addr_TODrawScissorXYWH = 0x004f9230;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void FUN_008d5d20(int param_1, int param_2, int param_3, int param_4, int param_5);
+    public static int __addr_FUN_008d5d20 = 0x004d5d20;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void FUN_008c0f40(int param_1, int param_2, int param_3, int param_4);
+    public static int __addr_FUN_008c0f40 = 0x004c0f40;
+
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    public delegate void FUN_008c1350_DrawScissor512x416();
+    public static int __addr_FUN_008c1350_DrawScissor512x416 = 0x004c1350;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void FUN_008d5dc0(int param_1, int param_2, int param_3);
+    public static int __addr_FUN_008d5dc0 = 0x004d5dc0;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void FUN_008e6cc0(float param_1, float param_2, float param_3, float param_4, int param_5, int param_6, int param_7);
+    public static int __addr_FUN_008e6cc0 = 0x004e6cc0;
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void FUN_008d6630(int param_1, int param_2, int param_3);
+    public static int __addr_FUN_008d6630 = 0x004d6630;
 }
 
