@@ -520,53 +520,6 @@ public static unsafe class delegates {
     public delegate void FUN_00783bb0(byte mon_id);
     public static int __addr_FUN_00783bb0 = 0x00383bb0;
 
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-    public struct MonStats {
-        [FieldOffset(0x14)] public uint   hp;
-        [FieldOffset(0x18)] public uint   mp;
-        [FieldOffset(0x1c)] public uint   overkill_threshold;
-        [FieldOffset(0x20)] public byte   strength;
-        [FieldOffset(0x21)] public byte   defense;
-        [FieldOffset(0x22)] public byte   magic;
-        [FieldOffset(0x23)] public byte   magic_defense;
-        [FieldOffset(0x24)] public byte   agility;
-        [FieldOffset(0x25)] public byte   luck;
-        [FieldOffset(0x26)] public byte   evasion;
-        [FieldOffset(0x27)] public byte   accuracy;
-        [FieldOffset(0x28)] public ushort props;
-        [FieldOffset(0x2a)] public byte   poison_dmg;
-        [FieldOffset(0x2b)] public byte   elem_absorb;
-        [FieldOffset(0x2c)] public byte   elem_immune;
-        [FieldOffset(0x2d)] public byte   elem_resist;
-        [FieldOffset(0x2e)] public byte   elem_weak;
-        [FieldOffset(0x48)] public ushort auto_status1;
-        [FieldOffset(0x4a)] public ushort auto_status2;
-        [FieldOffset(0x4c)] public ushort auto_status3;
-        [FieldOffset(0x4e)] public ushort extra_status_resist;
-
-        [FieldOffset(0x70)] public ushort forced_move;
-        [FieldOffset(0x72)] public ushort monster_idx;
-        [FieldOffset(0x74)] public ushort model_idx;
-
-        [FieldOffset(0x77)] public byte   doom_counter;
-        [FieldOffset(0x78)] public ushort monster_arena_idx;
-
-        override public string ToString() {
-            return $"hp={hp}\n" +
-                   $"mp={mp}\n" +
-                   $"strength={strength}\n" +
-                   $"defense={defense}\n" +
-                   $"magic={magic}\n" +
-                   $"magic_defense={magic_defense}\n" +
-                   $"agility={agility}\n" +
-                   $"luck={luck}\n" +
-                   $"evasion={evasion}\n" +
-                   $"accuracy={accuracy}\n" +
-                   $"monster_arena_idx={monster_arena_idx}";
-        }
-    }
-
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate Chr* MsGetMon(byte mon_idx);
     public static int __addr_MsGetMon = 0x00395ab0;
