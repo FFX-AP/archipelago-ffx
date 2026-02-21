@@ -1210,7 +1210,7 @@ public unsafe partial class ArchipelagoFFXModule {
     };
 
     private static readonly Dictionary<string, (uint offset, ushort other_id)> event_to_jecht_sphere_offsets = new() {
-     // {"", (0x0000, 27) }, // Jecht Sphere 1  - Macalania Woods Post-Spherimorph | Handled from story_check 1470
+     // {"        ", (0x0000,  27) }, // Jecht Sphere 1  - Macalania Woods Post-Spherimorph | Handled from story_check 1470
         {"mcfr0000", (0x5FFA,  52) }, // Jecht Sphere 2  - Macalania Woods Entrance
         {"bsvr0000", (0x12F21, 28) }, // Jecht Sphere 3  - Besaid Village Beside Temple
         {"slik0300", (0x103C,  29) }, // Jecht Sphere 4  - S.S. Liki Bridge
@@ -1219,7 +1219,7 @@ public unsafe partial class ArchipelagoFFXModule {
         {"kino0500", (0x7BEF,  32) }, // Auron Sphere    - Mushroom Rock Road Ridge
         {"genk0600", (0x013B,  33) }, // Jecht Sphere 7  - Moonflow South Warf
         {"kami0000", (0x7128,  34) }, // Jecht Sphere 8  - Thunder Plains South
-        {"mtgz0100", (0x5098,  35) }, // Braska Sphere 9 - Mt. Gagazet Mountain Trail
+        {"mtgz0100", (0x5098,  35) }, // Braska Sphere   - Mt. Gagazet Mountain Trail
     };
 
     private static Dictionary<(int, int), uint> originalEntryPoints = new();
@@ -1682,11 +1682,10 @@ public unsafe partial class ArchipelagoFFXModule {
         // Jecht Sphere locations
         if (event_to_jecht_sphere_offsets.TryGetValue(event_name, out var jecht_sphere)) {
             set(code_ptr, jecht_sphere.offset, [
-                AtelOp.POPA     .build(),
                 AtelOp.PUSHII   .build(jecht_sphere.other_id),
                 AtelOp.CALLPOPA .build((ushort)CustomCallTarget.SEND_OTHER_LOCATION),
                 AtelOp.JMP      .build(0x0005),
-                .. atelNOPArray(6),
+                .. atelNOPArray(7),
                 ]);
         }
 
@@ -2940,8 +2939,14 @@ public unsafe partial class ArchipelagoFFXModule {
         switch (item_type) {
             case 0xA:
                 // Key Item
+
+                //Progressive Jecht's Sphere
+                if (item_id == 40992) {
+                    save_data->jecht_spheres_collected_count++;
+                }
+
                 h_TkMsImportantSet(item_id);
-                // TODO: Handle Jecht Spheres and Al Bhed Primers
+                // TODO: Handle Al Bhed Primers
                 break;
             case 0x2:
                 // Item
