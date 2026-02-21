@@ -694,10 +694,10 @@ public static class ArchipelagoData {
             story_checks = {
                 { 1470, new() {check_delegate = (r) => {
                     ArchipelagoFFXModule.logger.Info("Macalania Woods visit complete");
-                    int other_id = 27;
-                    if (!FFXArchipelagoClient.local_checked_locations.Contains(other_id | (long)FFXArchipelagoClient.ArchipelagoLocationType.Other)) {
-                        if (ArchipelagoFFXModule.item_locations.treasure.TryGetValue(other_id, out var item)) {
-                            if (FFXArchipelagoClient.sendLocation(other_id, FFXArchipelagoClient.ArchipelagoLocationType.Other)) {
+                    int treasure_id = 177;
+                    if (!FFXArchipelagoClient.local_checked_locations.Contains(treasure_id | (long)FFXArchipelagoClient.ArchipelagoLocationType.Treasure)) {
+                        if (ArchipelagoFFXModule.item_locations.treasure.TryGetValue(treasure_id, out var item)) {
+                            if (FFXArchipelagoClient.sendLocation(treasure_id, FFXArchipelagoClient.ArchipelagoLocationType.Treasure)) {
                                 ArchipelagoFFXModule.obtain_item(item.id);
                             }
                         }

@@ -1210,8 +1210,8 @@ public unsafe partial class ArchipelagoFFXModule {
     };
 
     private static readonly Dictionary<string, (uint offset, ushort other_id)> event_to_jecht_sphere_offsets = new() {
-     // {"        ", (0x0000,  27) }, // Jecht Sphere 1  - Macalania Woods Post-Spherimorph | Handled from story_check 1470
-        {"mcfr0000", (0x5FFA,  52) }, // Jecht Sphere 2  - Macalania Woods Entrance
+     // {"        ", (0x0000, 177) }, // Jecht Sphere 1  - Macalania Woods Post-Spherimorph | Handled from story_check 1470
+        {"mcfr0000", (0x5FFA,  27) }, // Jecht Sphere 2  - Macalania Woods Entrance
         {"bsvr0000", (0x12F21, 28) }, // Jecht Sphere 3  - Besaid Village Beside Temple
         {"slik0300", (0x103C,  29) }, // Jecht Sphere 4  - S.S. Liki Bridge
         {"lchb1300", (0x013B,  30) }, // Jecht Sphere 5  - Luca Stadium Basement A
