@@ -2294,6 +2294,13 @@ public unsafe partial class ArchipelagoFFXModule {
                 next_entrance = 0;
                 return false;
             }
+            else if ((current_map != 258 && current_map != 271) && (next_map == 258 || next_map == 271)) {
+                // Warping into Omega Ruins from elsewhere, but not warping within the region.
+                // Force warp to the save sphere
+                next_map = 258;
+                next_entrance = 2;
+                return true;
+            }
             else {
                 // Skip crystal collecting
                 if (next_map == 324 && save_data->story_progress == 3250) {
