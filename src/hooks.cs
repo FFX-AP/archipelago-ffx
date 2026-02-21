@@ -2941,7 +2941,7 @@ public unsafe partial class ArchipelagoFFXModule {
                 // Key Item
 
                 //Progressive Jecht's Sphere
-                if (item_id == 40992) {
+                if (item_id == 0xA020 && Globals.save_data->key_items.get(item_id)) {
                     save_data->jecht_spheres_collected_count++;
                 }
 
