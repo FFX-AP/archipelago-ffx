@@ -80,7 +80,6 @@ public class ArchipelagoClientModule : FhModule {
                 session = ArchipelagoSessionFactory.CreateSession(server);
                 death_link = session.CreateDeathLinkService();
                 connectHandlers(session, death_link);
-                var roomInfoPacket =  session.ConnectAsync();
 
                 login_result = session.TryConnectAndLogin(
                     "Final Fantasy X",
