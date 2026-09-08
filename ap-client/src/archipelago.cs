@@ -905,7 +905,7 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
         uint slot2 = 0;
         uint slot3 = 0;
 
-        h_MsGetSavePartyMember(&slot1, &slot2, &slot3);
+        FhXCall.MsGetSavePartyMember.fnptr!(&slot1, &slot2, &slot3);
 
         return [slot1, slot2, slot3];
     }

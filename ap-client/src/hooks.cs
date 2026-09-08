@@ -215,7 +215,7 @@ public unsafe partial class ArchipelagoFFXModule {
             && FhXCall.TkMenuCtrlSummon.hook(this, TkMenuCtrlSummon)
             && FhXCall.FUN_008cdb70.hook(this, DrawAeonCustomizationMenu)
             && FhXCall.FUN_008d5720.hook(this, FUN_008d5720)
-            && FhXCall.TODrawWindow.hook(this, render_game);
+            && FhGCall.TODrawMessageWindow.hook(this, render_game);
         //  && _FUN_00656c90.hook() && _FUN_0065ee30.hook();
         //  && _openFile.hook() && _FUN_0070aec0.hook();
         //  && _MsCheckLeftWindow.hook() && _MsCheckUseCommand.hook() && _TOBtlDrawStatusLimitGauge.hook();
@@ -2642,14 +2642,6 @@ public unsafe partial class ArchipelagoFFXModule {
         return 1;
     }
 
-    // TODO: Get function pointer instead of hook for most of these
-    public void h_MsGetSavePartyMember(uint* param_1, uint* param_2, uint* param_3) {
-        //logger.Debug($"get_current_party_slots");
-        FhXCall.MsGetSavePartyMember.chain_from(h_MsGetSavePartyMember).fnptr!(param_1, param_2, param_3);
-
-        //logger.Debug($"get_current_party_slots: slot_0={*param_1}, slot_1={*param_2}, slot_2={*param_3}");
-    }
-
     // Pre-battle
     public void MsBattleExe(uint param_1, int field_idx, int group_idx, int formation_idx) {
         // Evrae is 52, 0, 0
@@ -2938,7 +2930,7 @@ public unsafe partial class ArchipelagoFFXModule {
             amount -= excess;
         }
 
-        return FhXCall.MsSaveItemUse.chain_from(give_item).fnptr!(item_id, amount);
+        return FhXCall.MsSaveItemUse.fnptr!(item_id, amount);
     }
 
     private void h_TkMsImportantSet(uint param_1) {
@@ -4200,7 +4192,7 @@ public unsafe partial class ArchipelagoFFXModule {
     public Dictionary<string, CustomStringDrawInfo> customStringDrawInfos = [];
 
     public void render_game() {
-        FhXCall.TODrawWindow.chain_from(render_game).fnptr!();
+        FhGCall.TODrawMessageWindow.chain_from(render_game).fnptr!();
 
         foreach ((string key, CustomStringDrawInfo drawInfo) in customStringDrawInfos) {
             fixed (byte* text = drawInfo.customString.encoded) {
