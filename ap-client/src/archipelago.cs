@@ -158,6 +158,8 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
 
         public bool skip_state_updates { get; set; }
 
+        public ArchipelagoState() {}
+
         public ArchipelagoState(ArchipelagoFFXModule module) {
             SeedId                     = ArchipelagoFFXModule.seed.Options.SeedId;
             region_states              = ArchipelagoFFXModule.region_states;
