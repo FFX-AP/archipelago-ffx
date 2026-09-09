@@ -531,7 +531,7 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
     }
 
     public override void load_local_state(FileStream local_state_file, FhLocalStateInfo local_state_info) {
-        SemVer save_version = new(local_state_info.Version);
+        SemVer save_version = new SemVer(local_state_info.Version).WithoutMetadata();
         if (save_version != Version) {
             _logger.Warning($"Saved with different AP version! Current is {Version} but save is {save_version}");
 
