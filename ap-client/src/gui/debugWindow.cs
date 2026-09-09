@@ -481,7 +481,7 @@ public unsafe class ArchipelagoGuiModule : FhModule {
             ImGui.InputText("Password", ref client_input_password, 50);
             if (ImGui.Button("Connect")) {
                 //Task.Run(() => FFXArchipelagoClient.Connect(client_input_address, client_input_name, client_input_password));
-                _ = _client!.Connect(client_input_address, client_input_name, client_input_password);
+                _client!.Connect(client_input_address, client_input_name, client_input_password);
                 //FFXArchipelagoClient.Connect(client_input_address, client_input_name, client_input_password);
             }
         } else {
