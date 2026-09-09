@@ -2936,7 +2936,7 @@ public unsafe partial class ArchipelagoFFXModule {
     private void h_TkMsImportantSet(uint param_1) {
         _logger.Debug($"give_key_item: {param_1}");
 
-        FhXCall.TkMsImportantSet.chain_from(h_TkMsImportantSet).fnptr!(param_1);
+        FhXCall.TkMsImportantSet.fnptr!(param_1);
     }
 
     private nint h_read_from_bin(int param_1, nint param_2, int* param_3) {
