@@ -2652,11 +2652,11 @@ public unsafe partial class ArchipelagoFFXModule {
             _logger.Info("Tried to avoid getting Penance'd!");
         }
 
-        var field_ptr = Battle.btl->ptr_btl_bin_fields + field_idx * 0xe;
+        uint field_ptr = (uint)(Battle.btl->ptr_btl_bin_fields + field_idx * 0xe);
         string field_name = Marshal.PtrToStringAnsi((nint)(field_ptr+6))!;
 
-        var group_ptr = FhXCall.MsBtlListGroup.fnptr!(field_idx, group_idx);
-        byte group_name = *(byte*)(group_ptr+5 + formation_idx * 2);
+        BtlBinGroup* group_ptr = FhXCall.MsBtlListGroup.fnptr!(field_idx, group_idx);
+        byte group_name = (&group_ptr->first_formation)[formation_idx].index;
 
         string encounter_name = $"{field_name}_{group_name:00}";
         _logger.Debug($"{encounter_name}: param_1={param_1}, ({field_idx}, {group_idx}, {formation_idx})");
