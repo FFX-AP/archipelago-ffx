@@ -85,7 +85,7 @@ public class ArchipelagoClientModule : FhModule {
                     "Final Fantasy X",
                     user,
                     ItemsHandlingFlags.RemoteItems,
-                    Version.Parse("0.6.0"),
+                    Version.Parse(ArchipelagoFFXModule.Version.ToString()),
                     password: password,
                     requestSlotData: true
                 );

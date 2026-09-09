@@ -429,9 +429,9 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
 
     private static readonly string VersionString = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
 
-    private static readonly SemVer FullVersion = new(VersionString);
-    private static readonly SemVer Version = FullVersion.WithoutMetadata();
-    private record SemVer(
+    internal static readonly SemVer FullVersion = new(VersionString);
+    internal static readonly SemVer Version = FullVersion.WithoutMetadata();
+    internal record SemVer(
         int major,
         int minor,
         int patch,
