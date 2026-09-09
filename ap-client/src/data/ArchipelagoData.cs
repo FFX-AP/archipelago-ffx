@@ -1468,7 +1468,7 @@ public static class ArchipelagoData {
             }
         },
 
-        // Tidus only gets 1 turn?
+        // Lancet tutorial. Tidus only gets 1 turn?
         { "klyt00_50", (client, ffx_interop) => ffx_interop.set_party([ PlySaveId.PC_TIDUS, PlySaveId.PC_KIMAHRI, PlySaveId.PC_LULU ], true, false) },
 
         // Piercing tutorial. Tidus only gets 1 turn. Enemy only attacks 3rd character?

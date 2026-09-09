@@ -865,7 +865,7 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
         int work = 0;
         int storage = 0;
 
-        Common_warpToMap((AtelBasicWorker*)&work, &storage, &stack);
+        h_Common_warpToMap.fnptr!((AtelBasicWorker*)&work, &storage, &stack);
     }
 
     public void call_remove_party_member(int character_id, bool long_term = false) {
@@ -875,8 +875,8 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
         int work = 0;
         int storage = 0;
 
-        if (!long_term) Common_removePartyMember((AtelBasicWorker*)&work, &storage, &stack);
-        else Common_removePartyMemberLongTerm((AtelBasicWorker*)&work, &storage, &stack);
+        if (!long_term) h_Common_removePartyMember.fnptr!((AtelBasicWorker*)&work, &storage, &stack);
+        else h_Common_removePartyMemberLongTerm.fnptr!((AtelBasicWorker*)&work, &storage, &stack);
     }
 
     public void call_add_party_member(int character_id) {
@@ -886,7 +886,7 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
         int work = 0;
         int storage = 0;
 
-        Common_addPartyMember((AtelBasicWorker*)&work, &storage, &stack);
+        h_Common_addPartyMember.fnptr!((AtelBasicWorker*)&work, &storage, &stack);
     }
 
     public void call_put_party_member_in_slot(int slot, int character_id) {
@@ -897,7 +897,7 @@ public unsafe partial class ArchipelagoFFXModule : FhModule {
         int work = 0;
         int storage = 0;
 
-        Common_putPartyMemberInSlot((AtelBasicWorker*)&work, &storage, &stack);
+        h_Common_putPartyMemberInSlot.fnptr!((AtelBasicWorker*)&work, &storage, &stack);
     }
 
     public uint[] get_party_frontline() {

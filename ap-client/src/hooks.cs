@@ -117,10 +117,6 @@ public unsafe partial class ArchipelagoFFXModule {
     //    return result;
     //}
 
-    public uint h_FUN_0070aec0(nint _this, uint voice_id, uint param_2) {
-        return FhXCall.FUN_0070aec0.chain_from(h_FUN_0070aec0).fnptr!(_this, voice_id, param_2);
-    }
-
     private FhGCall.d_CT_RetInt[] custom_ct_retints;
     private int   turnAroundScriptLength;
     private byte* turnAroundScript;
@@ -2956,19 +2952,19 @@ public unsafe partial class ArchipelagoFFXModule {
     private ushort h_get_weapon_name(Equipment* param_1) {
         _logger.Debug($"get_weapon_name: {(int)param_1}");
 
-        return FhXCall.MsWeaponNameNum.chain_from(h_get_weapon_name).fnptr!(param_1);
+        return FhXCall.MsWeaponNameNum.fnptr!(param_1);
     }
 
     private void h_get_weapon_model(ushort name_id, byte owner, bool simplified, ushort* model_id_pointer) {
         _logger.Debug($"get_weapon_model: {name_id}, {owner}, {simplified}, {*model_id_pointer}, ");
 
-        FhXCall.MsWeaponName.chain_from(h_get_weapon_model).fnptr!(name_id, owner, simplified, model_id_pointer);
+        FhXCall.MsWeaponName.fnptr!(name_id, owner, simplified, model_id_pointer);
     }
 
     private void h_obtain_treasure_cleanup(BtlRewardData* param_1, int param_2) {
         _logger.Debug("obtain_treasure_cleanup");
 
-        FhXCall.FUN_007993f0.chain_from(h_obtain_treasure_cleanup).fnptr!(param_1, param_2);
+        FhXCall.FUN_007993f0.fnptr!(param_1, param_2);
     }
 
     public void obtain_item(uint item_id, int amount=-1) {
@@ -3813,7 +3809,7 @@ public unsafe partial class ArchipelagoFFXModule {
         // Warp
         atelStack->push_int(382);
         atelStack->push_int(0);
-        Common_warpToMap(work, storage, atelStack);
+        h_Common_warpToMap.fnptr!(work, storage, atelStack);
         return 1;
     }
 
@@ -3914,7 +3910,7 @@ public unsafe partial class ArchipelagoFFXModule {
 
         atelStack->push_int(map);
         atelStack->push_int(entrance);
-        Common_transitionToMap(work, storage, atelStack);
+        h_Common_transitionToMap.fnptr!(work, storage, atelStack);
 
         return 1;
     }
